@@ -1128,10 +1128,24 @@ header .container .navbar-nav li a.button-transparentes-primary:hover {
     justify-content: center;
 }
 
-.impacto .accordion-body .dato .circulo {
+.impacto .accordion-body .dato .circulorojo {
     height: 80px;
     width: 80px;
     background: #FF4609;
+    border-radius: 100%;
+}
+
+.impacto .accordion-body .dato .circuloamarillo {
+    height: 80px;
+    width: 80px;
+    background: #FFC609;
+    border-radius: 100%;
+}
+
+.impacto .accordion-body .dato .circuloverde {
+    height: 80px;
+    width: 80px;
+    background: #00E978;
     border-radius: 100%;
 }
 
