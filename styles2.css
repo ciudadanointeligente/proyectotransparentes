@@ -1,3 +1,4 @@
+
 body {
     background: #F5F4E9;
     font-family: "Rokkitt", serif;
@@ -233,7 +234,10 @@ header .container .navbar-nav li a.button-transparentes-primary:hover {
     color: white;
 }
 
-
+element.style {
+    position: relative;
+    height: 4379.23px;
+}
 /*proyectos de ley resumen*/
 
 .seccion-proyectos {
@@ -1295,143 +1299,3 @@ header .container .navbar-nav li a.button-transparentes-primary:hover {
     margin-bottom: 10px;
 }
 
-
-
-/*Seccion home y el proyecto*/
-
-
-img.portada {
-    width: 100%;
-}
-
-
-.contenido-inicio-cta {
-    margin: 30px 0px;
-}
-
-.contenido-inicio-cta .row {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.contenido-inicio-cta h2 span {
-    background: #FFACCA;
-    font-weight: bold;
-    margin-bottom: 0px;
-    padding: 5px;
-}
-
-.contenido-inicio-cta .botones ul {
-    list-style: none;
-    padding: 0px;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-
-}
-
-.contenido-inicio-cta .botones ul li {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-start;
-
-}
-
-.contenido-inicio-cta .botones ul li a {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: white !important;
-    background: #005BFF;
-    border-radius: 40px;
-    padding: 8px 22px !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 20px;
-}
-
-.contenido-inicio-cta .botones ul li a:hover {
-    color: white !important;
-    background: #FF4609;
-}
-
-
-
-/*Sobre el proyecto*/
-.portada-seccion {
-    padding: 80px 0px;
-    width: 100%;
-}
-
-.portada-seccion h1 {
-    font-weight: 400;
-    font-size: 3.5rem;
-}
-
-.portada-seccion h1 span {
-    font-weight: bold;
-    font-size: 3rem;
-}
-
-.contenido-inicio-cta p {
-    text-align: left;
-    font-weight: bold;
-    font-size: 1.3rem;
-}
-
-
-.objetivos {
-    padding: 80px 0px;
-}
-
-.objetivos h2 span {
-    background: #FF4609;
-    padding: 5px;
-    color: white;
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 30px;
-}
-
-.objetivos h2 {
-    margin-bottom: 30px;
-}
-
-.objetivos h3 {
-    color: #005BFF;
-    font-weight: bold;
-    font-size: 1.5rem;
-}
-
-.objetivos p {
-    color: #2A2922;
-    font-weight: bold;
-    font-size: 1.3rem;
-}
-
-
-@media (max-width:768px) {
-
-    .contenido-inicio-cta .botones ul {
-        justify-content: center;
-    }
-    
-    .descripcion{
-        padding: 20px;
-    }
-
-    .objetivos h2 {
-        margin-bottom: 20px;
-    }
-
-    .contenido-inicio-cta p {
-        text-align: center;
-    }
-
-
-    .objetivos p {
-        margin-bottom: 40px;
-    }
-}
