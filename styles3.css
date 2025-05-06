@@ -199,7 +199,6 @@ header .container .navbar-nav li a.button-transparentes-primary:hover {
     display: flex;
     flex-direction: row;
     margin: 0px;
-    flex-wrap: wrap;
 }
 
 .filtros .accordion-body ul li {
@@ -778,7 +777,7 @@ header .container .navbar-nav li a.button-transparentes-primary:hover {
 }
 
 .modal {
-    z-index: 2000 !important;
+  z-index: 2000 !important;
 }
 
 
@@ -1227,8 +1226,8 @@ header .container .navbar-nav li a.button-transparentes-primary:hover {
 
 .ruta-del-proyecto .tab-pane button {
     background: #2A2922 !important;
-    color: white !important;
-    margin-top: 10px;
+    color: white!important;
+    margin-top:10px;
 }
 
 .ruta-del-proyecto .tab-pane ul {
@@ -1292,7 +1291,7 @@ header .container .navbar-nav li a.button-transparentes-primary:hover {
     transform: rotate(180deg);
 }
 
-.ruta-del-proyecto .nav-pills .nav-link {
+.ruta-del-proyecto .nav-pills .nav-link{
     margin-bottom: 10px;
 }
 
@@ -1418,8 +1417,8 @@ img.portada {
     .contenido-inicio-cta .botones ul {
         justify-content: center;
     }
-
-    .descripcion {
+    
+    .descripcion{
         padding: 20px;
     }
 
@@ -1435,139 +1434,4 @@ img.portada {
     .objetivos p {
         margin-bottom: 40px;
     }
-}
-
-
-
-/*Ajustes versión movil*/
-
-
-@media (max-width:768px) {
-    .container {
-        width: 90%;
-        margin: auto;
-    }
-
-    .portada-seccion {
-        padding: 40px 0px;
-    }
-
-    .portada-seccion h1 {
-        font-size: 2rem !important;
-    }
-
-    .portada-seccion h1 span {
-        font-size: 2.8rem !important;
-    }
-
-    .portada-seccion .descripcion-seccion {
-        background: transparent;
-    }
-
-    .portada-seccion .descripcion-seccion p {
-        background: white;
-    }
-
-    .img-decoracion .contenedor-decoracion {
-        display: none;
-    }
-
-    .filtros .accordion-body ul li {
-        margin: 10px 0px;
-        padding-right: 10px;
-    }
-
-    .filtros .accordion-body ul {
-        flex-wrap: wrap;
-    }
-
-    .seccion-proyectos {
-        margin-top: 40px;
-    }
-
-    .proyectos h2 {
-        font-size: 2rem;
-    }
-
-    .simbologia {
-        padding-right: 0px;
-    }
-
-    .simbologia .container {
-        width: 100% !important;
-    }
-
-    .seccion-proyecto h2 {
-        font-size: 2rem;
-    }
-
-    .seccion-proyecto {
-        margin-top: 40px;
-        margin-bottom: 40px;
-    }
-
-    .seccion-proyecto .img-decoracion-azul {
-        top: -100px;
-        width: 300px;
-    }
-
-    .seccion-proyecto .img-dado-1 {
-        display: none;
-    }
-
-    .resumen-ejecutivo-seccion {
-        margin-bottom: 40px;
-    }
-
-    .footer-decoracion {
-        display: none;
-    }
-
-    .posibilidad-de-avance {
-        margin-bottom: 40px;
-    }
-
-    .posibilidad-de-avance p.descripcion {
-        padding: 20px 0px;
-    }
-
-    .decoracion-mano .img-mano-vertical {
-        display: none;
-    }
-
-    .impacto .accordion-body .dato {
-        width: 100%;
-    }
-
-    .impacto .accordion-body .descripcion {
-        width: 100%;
-    }
-
-    .impacto .accordion-body {
-        flex-wrap: wrap;
-    }
-
-    .impacto .accordion-body .descripcion p {
-        padding: 0px;
-    }
-
-    #accordion-ciudadania {
-        margin-bottom: 40px;
-    }
-
-    #accordion-osc {
-        margin-bottom: 40px;
-    }
-
-    .ruta-del-proyecto h3 {
-        margin-bottom: 10px;
-    }
-
-    .ruta-del-proyecto h3 span {
-        font-size: 2rem;
-    }
-
-    .ruta-del-proyecto div div {
-        flex-wrap: wrap;
-    }
-}
+sty}
