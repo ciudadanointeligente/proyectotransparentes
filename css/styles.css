@@ -1982,6 +1982,12 @@ img.portada {
 @media (max-width:768px) {
     .footer-decoracion .slogan {
         width: 300px;
-        top:87px;
+        top: 87px;
     }
+}
+
+.ruta-del-proyecto #v-pills-tab {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
