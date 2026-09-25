@@ -28,6 +28,9 @@
   }
 
   img {
+    /* El preflight de Tailwind pone display:block; el diseño original usaba
+       imágenes inline (logos del footer en línea, etc.). */
+    display: inline-block;
     max-width: 100%;
     height: auto;
   }
@@ -808,13 +811,22 @@
   }
 
   /* ---------- Grid del listado ---------- */
+  /* ---------- Sección de listado: título 100% + aside + grid ---------- */
+  .seccion-proyectos .titulo {
+    width: 100%;
+  }
+
   .contenedor.grid {
+    flex: 0 0 75%;
+    max-width: 75%;
     width: 75%;
     position: relative;
   }
 
   @media (max-width: 799px) {
     .contenedor.grid {
+      flex: 0 0 100%;
+      max-width: 100%;
       width: 100%;
       padding-left: 0;
     }
