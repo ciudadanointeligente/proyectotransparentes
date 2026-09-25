@@ -1370,6 +1370,13 @@
     margin-top: 40px;
   }
 
+  /* Los acordeones viven en un grid de 2 columnas; sin esto, al cerrar uno
+     su caja se estira a la altura del otro (abierto) y el fondo oscuro
+     rellena el espacio vacío ("se funde a negro"). */
+  .impacto .acordeon-item {
+    align-self: start;
+  }
+
   .acordeon {
     border: 0;
     margin: 0;
@@ -1388,6 +1395,14 @@
     background: var(--color-tinta);
     color: white;
     margin-bottom: 0;
+  }
+
+  /* Al cerrar un <details> el navegador oculta su contenido con una regla
+     de hoja de usuario; nuestro .acordeon-body con display:flex la pisa y
+     el contenido quedaba visible (caja con altura completa). Esta regla
+     (más específica) restaura el colapso real. */
+  .acordeon-item:not([open]) > .acordeon-body {
+    display: none;
   }
 
   .acordeon-item summary {
