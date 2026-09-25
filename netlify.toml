@@ -5,7 +5,7 @@
   publish = "dist"
 
 [build.environment]
-  NODE_VERSION = "20"
+  NODE_VERSION = "22"
   NPM_FLAGS = "--no-audit --no-fund"
 
 # Redirects de URLs antiguas (HTML plano) a URLs nuevas

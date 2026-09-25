@@ -114,7 +114,7 @@ Los campos curados a mano (orden, badges, tooltips, publicación) viven en el ma
    `ciudadanointeligente/proyectotransparentes`.
 3. Los ajustes ya vienen en `netlify.toml`:
    - build: `npm run build` · publish: `dist`
-   - `NODE_VERSION = 20` (además hay `.nvmrc`)
+   - `NODE_VERSION = 22` (además hay `.nvmrc`)
    - redirects 301 de las URLs antiguas · headers de seguridad
 4. Custom domain: `transparentes.cl` (el DNS ya apunta a Netlify; `public/CNAME` es referencia).
 
