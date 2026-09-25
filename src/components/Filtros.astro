@@ -1,0 +1,72 @@
+---
+interface Props {
+  /** Slug del tema activo ('todos' para el listado general) */
+  activo: string;
+  temas: Array<{ slug: string; nombre: string; url: string }>;
+}
+
+const { activo, temas } = Astro.props;
+const base = '/seguimiento-legislativo/';
+---
+
+<div class="container container-filtros">
+  <div class="box-filtros">
+    <div class="filtros">
+      <details class="box-filtros-details" open>
+        <summary class="filtros-titulo" aria-label="Mostrar u ocultar filtros por tema">
+          <h3>
+            Explora por la tematica del <b>proyecto de ley:</b>
+          </h3>
+          <img src="/img/flecha.png" alt="flecha" class="flecha" width="30" height="30" />
+        </summary>
+        <div class="filtros-cuerpo">
+          <ul class="filtros-lista">
+            <li>
+              <a
+                href={base}
+                class:list={['button-transparentes-filtros', activo === 'todos' && 'active']}
+                aria-current={activo === 'todos' ? 'page' : undefined}
+              >
+                Todos
+              </a>
+            </li>
+            {temas.map((tema) => (
+              <li>
+                <a
+                  href={tema.url}
+                  class:list={['button-transparentes-filtros', activo === tema.slug && 'active']}
+                  aria-current={activo === tema.slug ? 'page' : undefined}
+                >
+                  {tema.nombre}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </details>
+    </div>
+  </div>
+</div>
+
+<style>
+  .box-filtros .filtros {
+    width: 100%;
+  }
+
+  .box-filtros-details summary {
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .box-filtros-details summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .box-filtros-details .flecha {
+    transition: transform 0.3s ease;
+  }
+
+  .box-filtros-details[open] .flecha {
+    transform: rotate(180deg);
+  }
+</style>

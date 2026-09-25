@@ -1,0 +1,134 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Filtros from '../components/Filtros.astro';
+import Simbologia from '../components/Simbologia.astro';
+import ModalesInfo from '../components/ModalesInfo.astro';
+import ProyectoTarjeta from '../components/ProyectoTarjeta.astro';
+
+const [proyectos, temas] = await Promise.all([
+  getCollection('proyectos', (p) => p.data.publicado),
+  getCollection('temas'),
+]);
+
+const ordenados = proyectos.sort((a, b) => a.data.orden - b.data.orden);
+const temasMap = new Map(
+  temas.map((t) => [t.id, { nombre: t.data.nombre, url: `/seguimiento-legislativo/${t.id}/` }]),
+);
+const filtros = temas.map((t) => ({ slug: t.id, nombre: t.data.nombre, url: `/seguimiento-legislativo/${t.id}/` }));
+---
+
+<Layout
+  title="Seguimiento legislativo | Transparentes"
+  description="Información en tiempo real sobre el avance de proyectos de ley que impactan en la ciudadanía y la sociedad civil."
+>
+  <!-- Portada de sección -->
+  <div class="portada-seccion">
+    <div class="container">
+      <div class="md:flex md:gap-8 relative">
+        <div class="md:w-7/12">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Seguimiento legislativo</li>
+            </ol>
+          </nav>
+          <h1>Seguimiento<br /><span>Legislativo</span></h1>
+        </div>
+        <div class="md:w-5/12 descripcion-seccion">
+          <p>
+            <b>Una ciudadanía vigilante es esencial para el resguardo de la democracia. </b>En esta
+            página encontrarás información en tiempo real sobre el avance de proyectos de ley que
+            impactan en la ciudadanía y la sociedad civil.
+          </p>
+          <div class="contenedor-imagenes">
+            <img
+              src="/img/mano-collage.png"
+              alt="decoracion mano sosteniendo el tablero de filtros"
+              class="recorte-mano-collage"
+              width="170"
+              height="170"
+            />
+            <img
+              src="/img/dado-recorte.png"
+              alt="decoracion dado sobre tablero de forma decorativa"
+              class="recorte-dado-collage"
+              width="140"
+              height="140"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <Filtros activo="todos" temas={filtros} />
+
+  <div class="proyectos container seccion-proyectos">
+    <div class="titulo">
+      <h2>
+        Seguimiento de <span>{ordenados.length} proyectos</span> de ley
+      </h2>
+    </div>
+
+    <Simbologia />
+
+    <div class="contenedor grid" data-masonry>
+      {ordenados.map((proyecto) => (
+        <ProyectoTarjeta proyecto={proyecto} temasMap={temasMap} />
+      ))}
+    </div>
+  </div>
+
+  <ModalesInfo />
+
+  <script>
+    function layoutMasonry() {
+      const grid = document.querySelector<HTMLElement>('[data-masonry]');
+      if (!grid) return;
+      const items = Array.from(grid.children) as HTMLElement[];
+      if (!items.length) return;
+
+      const gap = 20;
+      const columnas = window.innerWidth >= 992 ? 3 : window.innerWidth >= 576 ? 2 : 1;
+      const ancho = grid.clientWidth;
+      const anchoColumna = (ancho - gap * (columnas - 1)) / columnas;
+
+      items.forEach((item) => {
+        item.style.position = 'absolute';
+        item.style.width = `${anchoColumna}px`;
+        item.style.margin = '0';
+      });
+
+      const alturas = new Array<number>(columnas).fill(0);
+      items.forEach((item) => {
+        const columna = alturas.indexOf(Math.min(...alturas));
+        item.style.left = `${columna * (anchoColumna + gap)}px`;
+        item.style.top = `${alturas[columna]}px`;
+        alturas[columna] += item.offsetHeight + gap;
+      });
+
+      grid.style.height = `${Math.max(...alturas) - gap}px`;
+      grid.classList.add('masonry-ready');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      layoutMasonry();
+      let timer: number;
+      window.addEventListener('resize', () => {
+        clearTimeout(timer);
+        timer = window.setTimeout(layoutMasonry, 150);
+      });
+    });
+  </script>
+
+  <style>
+    [data-masonry] .proyecto-resumen {
+      transition: opacity 0.2s ease;
+    }
+
+    [data-masonry]:not(.masonry-ready) .proyecto-resumen {
+      opacity: 0;
+    }
+  </style>
+</Layout>

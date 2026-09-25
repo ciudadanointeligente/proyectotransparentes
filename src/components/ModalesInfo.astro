@@ -1,0 +1,105 @@
+---
+const modales = [
+  {
+    id: 'modal-avance',
+    titulo: '¿Qué es la posibilidad de avance?',
+    items: [
+      { clase: 'rojo', texto: 'Alta', descripcion: 'Está en tabla para votación o en plazo de indicaciones.' },
+      { clase: 'amarillo', texto: 'Moderada', descripcion: 'Está en tabla para discusión y recepción de audiencias.' },
+      { clase: 'verde', texto: 'Baja', descripcion: 'Está fuera de tabla (no se discutirá esta semana).' },
+    ],
+  },
+  {
+    id: 'modal-ciudadania',
+    titulo: '¿Cuál es el impacto en la ciudadanía?',
+    items: [
+      {
+        clase: 'rojo',
+        texto: 'Alta',
+        descripcion:
+          'La ley afecta directamente principios democráticos y derechos fundamentales (participación ciudadana, transparencia, libertad de expresión, acceso a la información, etc.)',
+      },
+      {
+        clase: 'amarillo',
+        texto: 'Moderada',
+        descripcion:
+          'Puede tener efectos indirectos o a largo plazo sobre principios democráticos y derechos humanos.',
+      },
+      {
+        clase: 'verde',
+        texto: 'Baja',
+        descripcion: 'No genera un impacto relevante o solo regula aspectos administrativos menores.',
+      },
+    ],
+  },
+  {
+    id: 'modal-osc',
+    titulo: '¿Cuál es el impacto para la sociedad civil?',
+    items: [
+      {
+        clase: 'rojo',
+        texto: 'Alta',
+        descripcion:
+          'Puede restringir o ampliar las libertades y capacidades de la OSC, criminalizar el activismo o debilitar la transparencia.',
+      },
+      {
+        clase: 'amarillo',
+        texto: 'Moderada',
+        descripcion: 'Introduce cambios menores con potencial impacto positivo o negativo.',
+      },
+      {
+        clase: 'verde',
+        texto: 'Baja',
+        descripcion: 'No presenta amenazas significativas o mejora procesos sin controversia.',
+      },
+    ],
+  },
+];
+---
+
+{modales.map((modal) => (
+  <dialog class="modal-dialogo" id={modal.id} aria-labelledby={`${modal.id}-label`}>
+    <div class="modal-header">
+      <h1 id={`${modal.id}-label`}>{modal.titulo}</h1>
+      <button type="button" class="btn-close" data-close-modal aria-label="Cerrar">×</button>
+    </div>
+    <div class="modal-body">
+      {modal.items.map((item) => (
+        <div class="item">
+          <div class="dato">
+            <div class:list={[`circulo`, `circulo-${item.clase}`]}></div>
+            <p class:list={[item.clase === 'rojo' ? 'alta' : item.clase === 'amarillo' ? 'moderada' : 'baja']}>
+              {item.texto}
+            </p>
+          </div>
+          <div class="descripcion">
+            <p>{item.descripcion}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </dialog>
+))}
+
+<script>
+  document.addEventListener('click', (event) => {
+    const objetivo = (event.target as HTMLElement).closest('[data-open-modal]');
+    if (objetivo) {
+      const dialog = document.getElementById(objetivo.getAttribute('data-open-modal')!);
+      if (dialog instanceof HTMLDialogElement && 'showModal' in dialog) {
+        dialog.showModal();
+      }
+    }
+    const cerrar = (event.target as HTMLElement).closest('[data-close-modal]');
+    if (cerrar) {
+      const dialog = cerrar.closest('dialog');
+      if (dialog) dialog.close();
+    }
+    if (event.target instanceof HTMLDialogElement && event.target.open) {
+      const rect = event.target.getBoundingClientRect();
+      const dentro =
+        event.clientX >= rect.left && event.clientX <= rect.right && event.clientY >= rect.top && event.clientY <= rect.bottom;
+      if (!dentro) event.target.close();
+    }
+  });
+</script>

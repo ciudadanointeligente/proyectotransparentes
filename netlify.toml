@@ -1,0 +1,164 @@
+# https://docs.netlify.com/configure-builds/file-based-configuration/
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+  NPM_FLAGS = "--no-audit --no-fund"
+
+# Redirects de URLs antiguas (HTML plano) a URLs nuevas
+# NETLIFY_REDIRECTS imprimibles: la primera regla que coincide gana.
+
+# Portada y páginas estáticas
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/el-proyecto.html"
+  to = "/el-proyecto/"
+  status = 301
+
+[[redirects]]
+  from = "/seguimiento-legislativo.html"
+  to = "/seguimiento-legislativo/"
+  status = 301
+
+# Listados por tema (eran 5 archivos duplicados)
+[[redirects]]
+  from = "/transparencia.html"
+  to = "/seguimiento-legislativo/transparencia/"
+  status = 301
+
+[[redirects]]
+  from = "/participacion.html"
+  to = "/seguimiento-legislativo/participacion/"
+  status = 301
+
+[[redirects]]
+  from = "/probidad.html"
+  to = "/seguimiento-legislativo/probidad/"
+  status = 301
+
+[[redirects]]
+  from = "/justicia.html"
+  to = "/seguimiento-legislativo/justicia/"
+  status = 301
+
+[[redirects]]
+  from = "/medioambiente.html"
+  to = "/seguimiento-legislativo/medio-ambiente/"
+  status = 301
+
+# Detalle de proyectos (proyectoN.html -> /proyecto/<boletin>/)
+[[redirects]]
+  from = "/proyecto1.html"
+  to = "/proyecto/12100-07/"
+  status = 301
+
+[[redirects]]
+  from = "/proyecto2.html"
+  to = "/proyecto/16358-35/"
+  status = 301
+
+[[redirects]]
+  from = "/proyecto3.html"
+  to = "/proyecto/15643-06/"
+  status = 301
+
+[[redirects]]
+  from = "/proyecto4.html"
+  to = "/proyecto/16754-06/"
+  status = 301
+
+[[redirects]]
+  from = "/proyecto5.html"
+  to = "/proyecto/16888-06/"
+  status = 301
+
+[[redirects]]
+  from = "/proyecto6.html"
+  to = "/proyecto/16886-12/"
+  status = 301
+
+[[redirects]]
+  from = "/proyecto7.html"
+  to = "/proyecto/15590-06/"
+  status = 301
+
+[[redirects]]
+  from = "/proyecto8.html"
+  to = "/proyecto/11364-06/"
+  status = 301
+
+[[redirects]]
+  from = "/proyecto9.html"
+  to = "/proyecto/15959-06/"
+  status = 301
+
+[[redirects]]
+  from = "/proyecto10.html"
+  to = "/proyecto/17253-07/"
+  status = 301
+
+[[redirects]]
+  from = "/proyecto11.html"
+  to = "/proyecto/13991-07/"
+  status = 301
+
+[[redirects]]
+  from = "/proyecto12.html"
+  to = "/proyecto/16163-07/"
+  status = 301
+
+[[redirects]]
+  from = "/proyecto13.html"
+  to = "/proyecto/17262-06/"
+  status = 301
+
+[[redirects]]
+  from = "/proyecto14.html"
+  to = "/proyecto/13105-06/"
+  status = 301
+
+[[redirects]]
+  from = "/proyecto15.html"
+  to = "/proyecto/15351-07/"
+  status = 301
+
+[[redirects]]
+  from = "/proyecto16.html"
+  to = "/proyecto/17817-07/"
+  status = 301
+
+[[redirects]]
+  from = "/proyecto17.html"
+  to = "/proyecto/17797-06/"
+  status = 301
+
+# Páginas antiguas huérfanas / duplicadas
+[[redirects]]
+  from = "/proyecto.html"
+  to = "/seguimiento-legislativo/"
+  status = 301
+
+[[redirects]]
+  from = "/ruta.html"
+  to = "/seguimiento-legislativo/"
+  status = 301
+
+[[redirects]]
+  from = "/seguimiento.html"
+  to = "/seguimiento-legislativo/"
+  status = 301
+
+# Headers de seguridad
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"

@@ -1,0 +1,96 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { nivelInfo, badgeEtiqueta } from '../lib/niveles';
+
+interface Props {
+  proyecto: CollectionEntry<'proyectos'>;
+  temasMap: Map<string, { nombre: string; url: string }>;
+}
+
+const { proyecto, temasMap } = Astro.props;
+const { data } = proyecto;
+const url = `/proyecto/${data.slug}/`;
+
+const avance = nivelInfo(data.posibilidadAvance);
+const ciudadania = nivelInfo(data.impactoCiudadania);
+const osc = nivelInfo(data.impactoOSC);
+const badgeTexto = badgeEtiqueta(data.badge);
+---
+
+<article class="proyecto-resumen">
+  <div class="contenido">
+    <div class="contenido-gris">
+      <p class="boletin">
+        Boletín:
+        <a href={url}>{data.numero}</a>
+      </p>
+      {badgeTexto && (
+        <span class="tooltips-dato {data.badge === 'descartado' ? 'descartado' : ''}" data-tooltip={data.tooltip ?? ''}>
+          {badgeTexto}
+        </span>
+      )}
+    </div>
+
+    <div class="contenido-blanco">
+      <ul class="temas-lista">
+        {data.temas.map((slug) => {
+          const tema = temasMap.get(slug);
+          return tema ? (
+            <li>
+              <a class="etiqueta-tema" href={tema.url}>{tema.nombre}</a>
+            </li>
+          ) : null;
+        })}
+      </ul>
+      <p>Proyecto:</p>
+      <h3>{data.titulo}</h3>
+      <div class="info">
+        <p>Estado: <span>{data.estado}</span></p>
+      </div>
+      <div class="info">
+        <p>
+          Posibilidad de avance:
+          <span class={avance.clase}>{avance.etiqueta}</span>
+        </p>
+      </div>
+      <p class="impacto-title">Impacto</p>
+    </div>
+
+    <div class="poligono">
+      <img src="/img/poligono-decoracion.png" alt="" width="30" height="30" />
+    </div>
+
+    <div class="contenido-gris">
+      <div class="impacto">
+        <div class="ciudadania">
+          <div class="contenido">
+            <div class="figuras">
+              <div class:list={[`figura`, ciudadania.clase]}></div>
+            </div>
+            <div class="datos">
+              <p>
+                Ciudadanía<br />
+                <span class={ciudadania.clase}>{ciudadania.etiqueta}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="sociedad-civil">
+          <div class="contenido">
+            <div class="figuras">
+              <div class:list={[`figura`, osc.clase]}></div>
+            </div>
+            <div class="datos">
+              <p>
+                OSC <br /><span class={osc.clase}>{osc.etiqueta}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content-btn">
+    <a href={url} class="btn-transparentes">Ver estado</a>
+  </div>
+</article>

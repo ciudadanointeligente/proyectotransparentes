@@ -1,0 +1,94 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  proyecto: CollectionEntry<'proyectos'>;
+}
+
+const { ruta } = Astro.props.proyecto.data;
+---
+
+<div class="ruta-del-proyecto container">
+  <div class="md:flex md:items-start md:gap-6">
+    <div class="md:w-3/12 w-full md:pr-3">
+      <h3>
+        <span>Ruta del</span>
+        <br />proyecto de ley:
+      </h3>
+      <div class="pills-tramite" role="tablist" aria-label="Trámites del proyecto de ley" aria-orientation="vertical">
+        {ruta.map((tramite, i) => (
+          <button
+            type="button"
+            role="tab"
+            id={`pills-${i}-tab`}
+            aria-controls={`pills-${i}-panel`}
+            aria-selected={i === 0 ? 'true' : 'false'}
+            class:list={[i === 0 && 'active']}
+            data-ruta-tab={i}
+          >
+            {tramite.tramite}
+          </button>
+        ))}
+      </div>
+    </div>
+    <div class="md:w-9/12 w-full">
+      {ruta.map((tramite, i) => (
+        <div
+          class:list={['ruta-panel', i === 0 && 'active']}
+          id={`pills-${i}-panel`}
+          role="tabpanel"
+          aria-labelledby={`pills-${i}-tab`}
+          data-ruta-panel={i}
+        >
+          {tramite.secciones.map((seccion, j) => (
+            <details class="acordeon acordeon-item" open={j === 0}>
+              <summary>
+                {seccion.nombre}
+                <img src="/img/flecha-black.png" alt="flecha" class="flecha" width="20" height="20" />
+              </summary>
+              <div class="acordeon-body">
+                {seccion.descripcion && <h5 class="title">{seccion.descripcion}</h5>}
+                {seccion.items.length > 0 ? (
+                  <ul>
+                    {seccion.items.map((item) => (
+                      <li>
+                        {item.fecha !== '' && <p>{item.fecha}</p>}
+                        {item.links.map((link) => (
+                          <a href={link.url} target="_blank" rel="noopener noreferrer">
+                            {link.texto}
+                          </a>
+                        ))}
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+              </div>
+            </details>
+          ))}
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<script>
+  const tabs = Array.from(document.querySelectorAll<HTMLElement>('[data-ruta-tab]'));
+  const paneles = Array.from(document.querySelectorAll<HTMLElement>('[data-ruta-panel]'));
+
+  function activarTab(indice: number) {
+    tabs.forEach((tab, i) => {
+      const activo = i === indice;
+      tab.classList.toggle('active', activo);
+      tab.setAttribute('aria-selected', activo ? 'true' : 'false');
+    });
+    paneles.forEach((panel, i) => {
+      panel.classList.toggle('active', i === indice);
+    });
+  }
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      activarTab(Number(tab.getAttribute('data-ruta-tab')));
+    });
+  });
+</script>

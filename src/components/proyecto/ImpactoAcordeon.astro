@@ -1,0 +1,48 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { nivelInfo } from '../../lib/niveles';
+
+interface Props {
+  proyecto: CollectionEntry<'proyectos'>;
+}
+
+const { data } = Astro.props.proyecto;
+const ciudadania = nivelInfo(data.impactoCiudadania);
+const osc = nivelInfo(data.impactoOSC);
+---
+
+<div class="impacto container">
+  <div class="gap-6 grid md:grid-cols-2">
+    <details class="acordeon acordeon-item" open>
+      <summary>
+        Impacto en la Ciudadanía:
+        <img src="/img/flecha.png" alt="flecha" class="flecha" width="20" height="20" />
+      </summary>
+      <div class="acordeon-body">
+        <div class="dato">
+          <div class:list={[`circulo`, ciudadania.clase]}></div>
+          <h4>{ciudadania.etiqueta}</h4>
+        </div>
+        <div class="descripcion">
+          <p>{data.impactoCiudadaniaDescripcion}</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="acordeon acordeon-item" open>
+      <summary>
+        Impacto en la Sociedad Civil:
+        <img src="/img/flecha.png" alt="flecha" class="flecha" width="20" height="20" />
+      </summary>
+      <div class="acordeon-body">
+        <div class="dato">
+          <div class:list={[`circulo`, osc.clase]}></div>
+          <h4>{osc.etiqueta}</h4>
+        </div>
+        <div class="descripcion">
+          <p>{data.impactoOSCDescripcion}</p>
+        </div>
+      </div>
+    </details>
+  </div>
+</div>

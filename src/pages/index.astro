@@ -1,0 +1,47 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+  <!-- Imagen de portada -->
+  <section class="portada-home">
+    <img
+      src="/img/portada.png"
+      alt="Imagen de portada con el mensaje 'Democracia en juego, ciudadanía al mando'"
+      class="img-fluid w-full img-home-desktop"
+      width="1920"
+      height="1080"
+    />
+    <img
+      src="/img/home-img-celular.png"
+      alt="Imagen de portada con el mensaje 'Democracia en juego, ciudadanía al mando'"
+      class="img-fluid w-full img-home-celu"
+      width="768"
+      height="1200"
+    />
+  </section>
+
+  <!-- Sección de Información -->
+  <section class="informacion py-4">
+    <div class="container">
+      <div class="flex justify-center">
+        <div class="md:w-10/12 lg:w-8/12 text-center">
+          <img
+            src="/img/info.png"
+            alt="Descripción de la iniciativa Transparentes y sus objetivos"
+            class="img-fluid descripcion-desktop"
+            width="1080"
+            height="600"
+          />
+          <img
+            src="/img/bajada-home-celu.png"
+            alt="Descripción de la iniciativa Transparentes y sus objetivos"
+            class="img-fluid descripcion-celu"
+            width="768"
+            height="600"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

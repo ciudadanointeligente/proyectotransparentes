@@ -1,0 +1,87 @@
+---
+const pathname = Astro.url.pathname;
+
+const enlaces = [
+  { href: '/', label: 'Inicio', activa: pathname === '/', exacta: true },
+  {
+    href: '/el-proyecto/',
+    label: 'El proyecto',
+    activa: pathname.startsWith('/el-proyecto'),
+  },
+  {
+    href: '/seguimiento-legislativo/',
+    label: 'Seguimiento legislativo',
+    activa: pathname.startsWith('/seguimiento-legislativo'),
+  },
+];
+
+const boletinUrl =
+  'https://ciudadaniai.us5.list-manage.com/subscribe?u=73951bb4ca8d05cfc6a608807&id=530184575f';
+---
+
+<header class="header-sticky">
+  <div class="container">
+    <nav class="navbar-header" aria-label="Navegación principal">
+      <a class="navbar-brand" href="/" aria-label="Ir al inicio">
+        <img
+          src="/img/logo-transparentes-black.svg"
+          alt="Logotipo proyecto Transparentes"
+          class="img-nav-logo"
+          width="200"
+          height="44"
+        />
+      </a>
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-label="Abrir menú de navegación"
+        aria-controls="menu-principal"
+        aria-expanded="false"
+        data-nav-toggle
+      >
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-menu" id="menu-principal" data-nav-menu>
+        <ul class="nav-lista">
+          {enlaces.map((enlace) => (
+            <li>
+              <a
+                class:list={[enlace.activa && 'active']}
+                aria-current={enlace.activa ? 'page' : undefined}
+                href={enlace.href}
+              >
+                {enlace.label}
+              </a>
+            </li>
+          ))}
+          <li>
+            <a class="button-transparentes-primary" href={boletinUrl} target="_blank" rel="noopener">
+              Boletín
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector('[data-nav-toggle]');
+  const menu = document.querySelector('[data-nav-menu]');
+
+  if (toggle && menu) {
+    toggle.addEventListener('click', () => {
+      const abierto = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!abierto));
+      toggle.setAttribute('aria-label', abierto ? 'Abrir menú de navegación' : 'Cerrar menú de navegación');
+      menu.classList.toggle('open', !abierto);
+    });
+
+    menu.addEventListener('click', (event) => {
+      if ((event.target as HTMLElement).closest('a')) {
+        toggle.setAttribute('aria-expanded', 'false');
+        menu.classList.remove('open');
+      }
+    });
+  }
+</script>

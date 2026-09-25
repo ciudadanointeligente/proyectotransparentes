@@ -1,0 +1,30 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { nivelInfo } from '../../lib/niveles';
+
+interface Props {
+  proyecto: CollectionEntry<'proyectos'>;
+}
+
+const { data } = Astro.props.proyecto;
+const avance = nivelInfo(data.posibilidadAvance);
+---
+
+<div class="posibilidad-de-avance container">
+  <div class="flex-posibilidad">
+    <div class="decoracion-mano">
+      <img src="/img/mano-collage.png" alt="decoracion mano" class="img-mano-vertical" width="140" height="140" />
+    </div>
+    <div class="md:w-4/12 w-full">
+      <div class="titulo">
+        <h2>Posibilidad de avance</h2>
+        <p class:list={[`dato`, avance.clase]}>{avance.etiqueta}</p>
+      </div>
+    </div>
+    <div class="md:w-8/12 w-full">
+      <div class="descripcion">
+        <p class="descripcion">{data.descripcionAvance}</p>
+      </div>
+    </div>
+  </div>
+</div>

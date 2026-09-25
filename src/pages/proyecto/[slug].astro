@@ -1,0 +1,112 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import ResumenEjecutivo from '../../components/proyecto/ResumenEjecutivo.astro';
+import PosibilidadAvance from '../../components/proyecto/PosibilidadAvance.astro';
+import ImpactoAcordeon from '../../components/proyecto/ImpactoAcordeon.astro';
+import RutaProyecto from '../../components/proyecto/RutaProyecto.astro';
+
+export async function getStaticPaths() {
+  const proyectos = await getCollection('proyectos');
+  return proyectos.map((proyecto) => ({
+    params: { slug: proyecto.data.slug },
+    props: { proyecto },
+  }));
+}
+
+interface Props {
+  proyecto: Awaited<ReturnType<typeof getCollection<'proyectos'>>>[number];
+}
+
+const { proyecto } = Astro.props;
+const { data } = proyecto;
+
+const temas = await getCollection('temas');
+const temasConUrl = data.temas
+  .map((slug) => {
+    const tema = temas.find((t) => t.id === slug);
+    return tema ? { nombre: tema.data.nombre, url: `/seguimiento-legislativo/${tema.id}/` } : null;
+  })
+  .filter(Boolean);
+
+const descripcionSeo = (data.descripcionAvance ?? data.titulo).slice(0, 160);
+---
+
+<Layout
+  title={`${data.numero} · ${data.titulo} | Transparentes`}
+  description={descripcionSeo}
+>
+  <!-- Portada de sección -->
+  <div class="portada-seccion">
+    <div class="container">
+      <div class="md:w-7/12">
+        <nav style="--bs-breadcrumb-divider: '/';" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+            <li class="breadcrumb-item"><a href="/seguimiento-legislativo/">Seguimiento legislativo</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Boletín n° {data.slug}</li>
+          </ol>
+        </nav>
+        <h1>
+          Boletín
+          <b>{data.numero}</b><br />
+        </h1>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ficha del proyecto -->
+  <div class="proyecto-lectura seccion-proyecto container">
+    <div class="decoracion-azul">
+      <img src="/img/decoracion-azul.png" alt="decoracion azul tipo estrella" class="img-decoracion-azul" width="400" height="400" />
+    </div>
+    <div class="decoracion-dado-1">
+      <img src="/img/dado-recorte.png" alt="decoracion dado" class="img-dado-1" width="120" height="120" />
+    </div>
+    <div class="decoracion-dado-2">
+      <img src="/img/dado-recorte.png" alt="decoracion dado" class="img-dado-2" width="120" height="120" />
+    </div>
+    <div class="titulo-3">
+      <h3>Proyecto de ley</h3>
+    </div>
+    <div class="temas">
+      {temasConUrl.map(
+        (tema) =>
+          tema && (
+            <a href={tema.url} class="etiqueta-tema">
+              {tema.nombre}
+            </a>
+          ),
+      )}
+    </div>
+    <div class="titulo-1">
+      <h2>{data.titulo}</h2>
+    </div>
+  </div>
+
+  <ResumenEjecutivo proyecto={proyecto} />
+
+  <PosibilidadAvance proyecto={proyecto} />
+
+  <ImpactoAcordeon proyecto={proyecto} />
+
+  <RutaProyecto proyecto={proyecto} />
+
+  <script>
+    document.addEventListener('scroll', function () {
+      const scrollY = window.scrollY;
+
+      const dado1 = document.querySelector('.img-dado-1');
+      const dado2 = document.querySelector('.img-dado-2');
+
+      if (dado1 && dado2) {
+        // Leves oscilaciones entre -10 y +10 grados
+        const rot1 = 260 + Math.sin(scrollY * 0.01) * 10;
+        const rot2 = 60 + Math.cos(scrollY * 0.01) * 10;
+
+        (dado1 as HTMLElement).style.transform = `rotate(${rot1}deg)`;
+        (dado2 as HTMLElement).style.transform = `rotate(${rot2}deg)`;
+      }
+    });
+  </script>
+</Layout>
