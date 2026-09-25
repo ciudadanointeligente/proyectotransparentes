@@ -439,13 +439,7 @@
   }
 
   .grid-masonry .proyecto-resumen {
-    width: 32%;
-  }
-
-  @media (max-width: 992px) {
-    .grid-masonry .proyecto-resumen {
-      width: 48%;
-    }
+    width: 48%;
   }
 
   @media (max-width: 576px) {
@@ -580,7 +574,7 @@
   .proyecto-resumen .impacto-title {
     font-weight: bold;
     font-size: 1.5rem;
-    padding-bottom: 15px;
+    padding-bottom: 20px;
   }
 
   .proyectos .poligono {
@@ -597,7 +591,9 @@
   .proyecto-resumen .impacto {
     display: flex;
     flex-direction: row;
-    padding-top: 20px;
+    gap: 16px;
+    padding-top: 24px;
+    padding-bottom: 12px;
   }
 
   .proyecto-resumen .impacto .ciudadania,
@@ -608,16 +604,18 @@
   .proyecto-resumen .impacto .contenido {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
     align-items: center;
+    gap: 12px;
   }
 
   .proyecto-resumen .impacto .contenido .figuras {
-    width: 30%;
+    flex: 0 0 auto;
+    width: 45px;
   }
 
   .proyecto-resumen .impacto .contenido .datos {
-    width: 70%;
+    flex: 1 1 auto;
+    min-width: 0;
   }
 
   .proyecto-resumen .impacto .contenido p {
@@ -669,8 +667,8 @@
     display: flex;
     justify-content: flex-start;
     padding-left: 30px;
-    margin-bottom: 20px;
-    margin-top: 10px;
+    margin-top: 20px;
+    margin-bottom: 24px;
   }
 
   .proyectos a.btn-transparentes {

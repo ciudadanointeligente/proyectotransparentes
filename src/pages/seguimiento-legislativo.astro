@@ -90,7 +90,7 @@ const filtros = temas.map((t) => ({ slug: t.id, nombre: t.data.nombre, url: `/se
       if (!items.length) return;
 
       const gap = 20;
-      const columnas = window.innerWidth >= 992 ? 3 : window.innerWidth >= 576 ? 2 : 1;
+      const columnas = window.innerWidth >= 576 ? 2 : 1;
       const ancho = grid.clientWidth;
       const anchoColumna = (ancho - gap * (columnas - 1)) / columnas;
 
