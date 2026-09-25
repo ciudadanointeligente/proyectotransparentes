@@ -946,10 +946,17 @@
   }
 
   /* ---------- Badge "Refundida" ---------- */
-  .proyecto-resumen .tooltips-dato {
+  .proyecto-resumen .badge-tooltip {
     position: absolute;
     right: -40px;
     top: 25px;
+    z-index: 5;
+    cursor: help;
+  }
+
+  .proyecto-resumen .tooltips-dato {
+    display: block;
+    width: max-content;
     padding: 4px 50px;
     transform: rotate(45deg);
     background: var(--color-tinta);
@@ -959,18 +966,14 @@
     font-size: 0.9rem;
     letter-spacing: 0.05em;
     cursor: help;
-    z-index: 5;
   }
 
-  .descartada .tooltips-dato {
+  .proyecto-resumen .descartado .tooltips-dato {
     background: var(--color-naranja);
   }
 
-  /* Tooltip simple (hover/focus) */
-  [data-tooltip] {
-    position: relative;
-  }
-
+  /* Tooltip (hover/focus) anclado al contenedor no rotado, para que el
+     "post-it" con la explicación quede derecho */
   [data-tooltip]:hover::after,
   [data-tooltip]:focus-visible::after {
     content: attr(data-tooltip);
@@ -988,7 +991,6 @@
     width: max-content;
     max-width: 260px;
     text-align: right;
-    transform: none;
     z-index: 40;
     line-height: 1.3;
     pointer-events: none;

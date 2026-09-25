@@ -25,8 +25,11 @@ const badgeTexto = badgeEtiqueta(data.badge);
         <a href={url}>{data.numero}</a>
       </p>
       {badgeTexto && (
-        <span class="tooltips-dato {data.badge === 'descartado' ? 'descartado' : ''}" data-tooltip={data.tooltip ?? ''}>
-          {badgeTexto}
+        <span
+          class:list={['badge-tooltip', data.badge === 'descartado' ? 'descartado' : '']}
+          data-tooltip={data.tooltip ?? ''}
+        >
+          <span class="tooltips-dato">{badgeTexto}</span>
         </span>
       )}
     </div>
